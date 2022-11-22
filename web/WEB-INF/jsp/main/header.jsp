@@ -78,6 +78,6 @@
             <a class="p-2 link-secondary" href="#">Science</a>
             <a class="p-2 link-secondary" href="#">Health</a>
             <a class="p-2 link-secondary" href="#">Style</a>
-            <a class="p-2 link-secondary" href="#">Travel</a>
+            <a class="p-2 link-secondary" href="addCat.do">등록하기</a>
         </nav>
     </div>

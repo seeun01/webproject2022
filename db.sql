@@ -10,3 +10,13 @@ CREATE TABLE user (
 INSERT INTO user(name, id, password) VALUES('김세은','seeun','qwer!@#$');
 INSERT INTO user(name, id, password) VALUES('김냐옹','meow','sidhddl');
 INSERT INTO user(name, id, password) VALUES('관리자','admin','admin1234');
+
+CREATE TABLE cat (
+                         `oid` INT(11) NOT NULL AUTO_INCREMENT,
+                         `fileName` varchar(100) NOT NULL,
+                         `catType` varchar(100) NOT NULL,
+                         `age` varchar(100) NOT NULL,
+                         `gender` varchar(100) NOT NULL,
+                         `location` varchar(100) NOT NULL,
+                         `etc` varchar(100) NOT NULL, PRIMARY KEY (`oid`)
+) ;
