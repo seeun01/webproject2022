@@ -1,13 +1,20 @@
 package handler.dao;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import handler.dto.CatDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.MapListHandler;
 import sql.Config;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class CatDAO {
     public static CatDAO it;
@@ -16,6 +23,22 @@ public class CatDAO {
         if(it==null)
             it = new CatDAO();
         return it;
+    }
+    public ArrayList<CatDTO> getAllCatData() { //모든 Example 데이터를 받아오기
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM `cat`", new MapListHandler());
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<CatDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<CatDTO>>() {
+        }.getType()); //위에서 불러온 DB를 ExampleDTO 타입으로 만들어서 return 해줌
+        return selectedList;
     }
 
     public String addCat(String data) {
