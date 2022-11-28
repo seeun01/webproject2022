@@ -27,7 +27,7 @@ public class Config {
             conn = DriverManager.getConnection(url);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("DB 연결 실패. mariaDB의 아이디 비밀번호가 Config 클래스와 일치하는지 확인해주세요.");
+            System.out.println("DB 연결 실패. MYSQL의 아이디 비밀번호가 Config 클래스와 일치하는지 확인해주세요.");
         }
         return conn; //DB 사용을 요구했던 메소드에게 로그인 정보를 돌려줌.
     }

@@ -198,11 +198,12 @@
         makeCatCard();
     })
     function makeCatCard(){
-        var makeCatAll = <%=catData%>;
-        var list = $('#card');
-        var text = '';
+        let makeCatAll = <%=catData%>;
+        let list = $('#card');
+        let text = '';
 
-        for(var i=0; i<makeCatAll.length; i++){
+        for(let i=0; i<makeCatAll.length; i++){
+            let id = i +1;
             text+=  '<div class="col">'
                 +'<div class="card shadow-sm">'
                 +'<img src = "/img/' + makeCatAll[i].fileName + '" class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#55595c"/></img>'
@@ -211,7 +212,8 @@
                 +'<p>' + makeCatAll[i].age + '살</p>'
                 +'<div class="d-flex justify-content-between align-items-center">'
                 +'<div class="btn-group">'
-                +'<button type="button" class="btn btn-sm btn-secondary">상세보기</button>'
+                /*+'<button type="button" class="btn btn-sm btn-secondary" href = "catDetail.do">상세보기</button>'*/
+                +'<a class="btn btn-sm btn-outline-secondary" href="catDetail.do?id=' + id + '">상세보기</a>'
                 +'</div>'
                 +'<small class="text-muted"></small>'
                 +'</div>'

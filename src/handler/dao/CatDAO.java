@@ -2,9 +2,8 @@ package handler.dao;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import handler.dto.CatDTO;
+import handler.dto.UserDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
@@ -65,5 +64,27 @@ public class CatDAO {
             DbUtils.closeQuietly(conn);
         }
         return "등록되었습니다";
+    }
+
+    public CatDTO getCat(String id) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM cat WHERE oid = ?;", new MapListHandler(), id);
+
+//            System.out.println(listOfMaps);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<CatDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<CatDTO>>() {}.getType());
+        if(selected.size()>0) {
+            return selected.get(0);
+        }
+        else
+            return null;
     }
 }
