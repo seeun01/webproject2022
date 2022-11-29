@@ -1,6 +1,7 @@
 package handler.dto;
 
 public class CatDTO {
+    private String oid;
     private String fileName;
     private String catType;
     private String age;
@@ -54,5 +55,12 @@ public class CatDTO {
 
     public void setEtc(String etc) {
         this.etc = etc;
+    }
+    public String getOid() {
+        return oid;
+    }
+
+    public void setOid(String oid) {
+        this.oid = oid;
     }
 }

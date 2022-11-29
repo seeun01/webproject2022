@@ -21,7 +21,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Roboto+Slab&display=swap" rel="stylesheet">
 
-
     <style>
         *{
             font-family: 'Playfair Display', serif;
@@ -37,6 +36,8 @@
 <%
     String catDetailData = (String) request.getAttribute("CatDetailData");
     System.out.println(catDetailData);
+    String id = request.getParameter("id");
+    System.out.println(id);
 %>
 <body>
     <div class="container">
@@ -52,50 +53,6 @@
         <div class="container">
             <h2 class="pb-2 border-bottom">상세소개</h2>
             <div class="row" id="card">
-               <%-- <div class="col-md-6">
-                    <img src = "/img/dana.png" style="width: 80%" style = "height: 80%"/>
-                </div>
-                <div class="col-md-6">
-                    <div class="d-flex flex-column gap-2">
-                        <div
-                                class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                        </div>
-                        <h4 class="fw-semibold mb-0">묘종</h4>
-                        <p class="text-muted border-bottom">터키쉬앙고라</p>
-                    </div>
-                    <div class="d-flex flex-column gap-2">
-                        <div
-                                class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                        </div>
-                        <h4 class="fw-semibold mb-0">나이</h4>
-                        <p class="text-muted border-bottom">5살</p>
-                    </div>
-                    <div class="d-flex flex-column gap-2">
-                        <div
-                                class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                        </div>
-                        <h4 class="fw-semibold mb-0">성별</h4>
-                        <p class="text-muted border-bottom">여</p>
-                    </div>
-                    <div class="d-flex flex-column gap-2">
-                        <div
-                                class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                        </div>
-                        <h4 class="fw-semibold mb-0">보호위치</h4>
-                        <p class="text-muted border-bottom">인천광역시 낙섬동로 104</p>
-                    </div>
-                    <div class="d-flex flex-column gap-2">
-                        <div
-                                class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                        </div>
-                        <h4 class="fw-semibold mb-0">특이사항</h4>
-                        <p class="text-muted border-bottom">아주 귀엽고귀엽고귀여움</p>
-                    </div>
-                    <p>	<form name="addForm" action="" method="post"></form>
-                    <a href="#" class="btn btn-info" onclick="addToCart()"> 도서 주문 &raquo;</a>
-                    <a href="./cart.jsp" class="btn btn-warning">장바구니&raquo;</a>
-                    <a href="books.jsp" class="btn btn-secondary">도서 목록 &raquo;</a>
-                </div>--%>
             </div>
             <hr>
         </div>
@@ -107,6 +64,7 @@
 
         function makeCatDetail() {
             let detailCat = <%=catDetailData%>;
+            let id = <%=id%>;
             let list = $('#card');
             let text = '';
 
@@ -129,12 +87,23 @@
                     +'<div class="d-flex flex-column gap-2"><div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3"></div>'
                     +'<h4 class="fw-semibold mb-0">특이사항</h4>'
                     +'<p class="text-muted border-bottom">'+ detailCat.etc +'</p></div>'
-                    +'<p><form name="addForm" action="" method="post"></form>'
+                    +'<p><form name="addForm" action="addCart.do?id='+ id +'" method="post"></form>'
                     +'<a href="#" class="btn btn-info" onclick=""> 입양신청 &raquo;</a>'
-                    +'<a href="" class="btn btn-warning">관심등록&raquo;</a>'
-                    +'<a href="" class="btn btn-secondary">목록&raquo;</a>'
+                    +'<a class="btn btn-success" onclick="addToCart()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"> <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg>관심등록</a>'
+                    +'<a href="cartList.do" class="btn btn-warning">관심목록보기&raquo;</a>'
+                    +'<a href="main.do" class="btn btn-secondary">목록&raquo;</a>'
                     +'</div>'
             list.append(text);
+        }
+
+        function addToCart(){
+            if(confirm("관심고양이로 추가되었습니다.")){
+                let id = <%=id%>;
+                window.location.href = 'addCart.do?id=' + id+ '';
+            }
+            else {
+                document.addForm.reset();
+            }
         }
     </script>
     <div>
