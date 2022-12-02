@@ -80,6 +80,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a class="btn btn-sm btn-outline-secondary" href="catDetail.do?id=<%=cat.getOid()%>">상세보기</a>
+                                <a class="btn btn-sm btn-outline-success" href="application.do?id=<%=cat.getOid()%>">입양신청하기</a>
                                 <a class="btn btn-sm btn-outline-danger" href="removeCart.do?id=<%=cat.getOid()%>">관심등록 삭제</a>
                             </div>
                             <small class="text-muted"></small>
